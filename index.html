@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RYK Clinic - Appointment</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eef5ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #0875d1;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #333;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #0875d1;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #0875d1;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056a8;
+}
+
+#message {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>RYK Clinic</h1>
+    <p class="subtitle">Book Your Doctor Appointment</p>
+
+    <form id="appointmentForm">
+
+        <label>Patient Name</label>
+        <input type="text" id="name"
+        placeholder="Enter your name" required>
+
+        <label>Phone Number</label>
+        <input type="tel" id="phone"
+        placeholder="Enter phone number"
+        pattern="[0-9+ -]{10,15}" required>
+
+        <label>Appointment Date</label>
+        <input type="date" id="date" required>
+
+        <label>Select Doctor</label>
+        <select id="doctor" required>
+            <option value="">Choose Doctor</option>
+            <option>General Physician</option>
+            <option>Cardiologist</option>
+            <option>Dermatologist</option>
+            <option>Dentist</option>
+            <option>Pediatrician</option>
+        </select>
+
+        <button type="submit">
+            Book Appointment
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+</div>
+
+<script>
+const form = document.getElementById("appointmentForm");
+const message = document.getElementById("message");
+
+// Disable past dates
+document.getElementById("date").min =
+    new Date().toISOString().split("T")[0];
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const date = document.getElementById("date").value;
+    const doctor = document.getElementById("doctor").value;
+
+    message.textContent =
+        "Appointment Booked Successfully!";
+
+    form.reset();
+
+    document.getElementById("date").min =
+        new Date().toISOString().split("T")[0];
+
+});
+</script>
+
+</body>
+</html>
